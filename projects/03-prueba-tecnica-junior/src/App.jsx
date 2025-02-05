@@ -1,26 +1,44 @@
 import { useEffect, useState } from 'react'
+import { getFact } from './services/fact'
+import './App.css'
 
-export function App() {
-  const CAT_ENDPOINT_FACT = 'https://catfact.ninja/fact'
-  // const CAT_ENDPOINT_IMAGE = `https://cataas.com/cat/says/${fisrtWord}`
-  const [fact, setFact] = useState('Hello cat here talking')
+function useCatImage({ fact }) {
+  const [image, setImage] = useState(null)
 
   useEffect(() => {
-    fetch(CAT_ENDPOINT_FACT)
-      .then((response) => response.json())
-      .then((data) => {
-        const { fact } = data
-        setFact(fact)
+    if (!fact) return
 
-        const fisrtWord = fact.split(' ', 3).join('')
-        console.log(fisrtWord)
-      })
+    const firstWord = fact.split(' ', 1)
+    setImage(`https://cataas.com/cat/says/${firstWord}`)
+  }, [fact])
+
+  return { image }
+}
+
+export function App() {
+  const [fact, setFact] = useState(null)
+  const { image } = useCatImage({ fact })
+
+  useEffect(() => {
+    handleClick()
   }, [])
 
+  const handleClick = async () => {
+    const newFact = await getFact()
+    setFact(newFact)
+  }
+
   return (
-    <>
+    <main>
       <h1>App de gatitos</h1>
-      <p>{fact}</p>
-    </>
+      <section>
+        {fact && <p className="fact_text">{fact}</p>}
+        <img
+          src={image}
+          alt="Random cat with the 3 first words of the random sentence"
+        />
+      </section>
+      <button onClick={handleClick}>New cat fact</button>
+    </main>
   )
 }
