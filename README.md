@@ -10,7 +10,7 @@ Curso para aprender **React** de @midudev
 ## ⌨️ Proyectos de React realizados por el momento
 
 | Número | Proyecto | Código |
-| --- | --- | --- | --- |
+| --- | --- | --- |
 | `00` | Twitter Follow Card | [Ver](projects/00-hola-mundo/) |
 | `01` | Tic Tac Toe | [Ver](projects/01-tic-tac-toe/) | 
 | `02` | Mouse Follower | [Ver](projects/02-mouse-follower/) | 
