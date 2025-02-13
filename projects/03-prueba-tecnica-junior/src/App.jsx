@@ -1,31 +1,13 @@
-import { useEffect, useState } from 'react'
-import { getFact } from './services/fact'
 import './App.css'
-
-function useCatImage({ fact }) {
-  const [image, setImage] = useState(null)
-
-  useEffect(() => {
-    if (!fact) return
-
-    const firstWord = fact.split(' ', 1)
-    setImage(`https://cataas.com/cat/says/${firstWord}`)
-  }, [fact])
-
-  return { image }
-}
+import { useCatImage } from './hooks/useCatImage'
+import { useCatFact } from './hooks/useCatFact'
 
 export function App() {
-  const [fact, setFact] = useState(null)
+  const { fact, refreshFact } = useCatFact()
   const { image } = useCatImage({ fact })
 
-  useEffect(() => {
-    handleClick()
-  }, [])
-
   const handleClick = async () => {
-    const newFact = await getFact()
-    setFact(newFact)
+    refreshFact()
   }
 
   return (
