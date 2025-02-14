@@ -3,6 +3,7 @@ export const getMovies = async ({ query }) => {
   const SEARCH_ENDPOINT = `http://www.omdbapi.com/?apikey=${API_KEY}&s=${query}`
 
   if (query === '') return null
+
   try {
     const response = await fetch(SEARCH_ENDPOINT)
     const json = await response.json()
