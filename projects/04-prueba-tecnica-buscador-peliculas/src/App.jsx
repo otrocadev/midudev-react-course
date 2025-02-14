@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import './App.css'
 import RenderMovies from './components/RenderMovies'
 import useMovieResults from './hooks/useMovieResults'

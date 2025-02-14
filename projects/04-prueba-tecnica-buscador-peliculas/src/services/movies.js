@@ -1,5 +1,5 @@
 export const getMovies = async ({ query }) => {
-  const API_KEY = 'ac7951d7'
+  const API_KEY = import.meta.env.VITE_API_KEY
   const SEARCH_ENDPOINT = `http://www.omdbapi.com/?apikey=${API_KEY}&s=${query}`
 
   if (query === '') return null
