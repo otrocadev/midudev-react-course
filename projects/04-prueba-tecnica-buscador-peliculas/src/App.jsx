@@ -1,16 +1,22 @@
+import { useState } from 'react'
 import './App.css'
 import RenderMovies from './components/RenderMovies'
 import useMovieResults from './hooks/useMovieResults'
 import useSearch from './hooks/useSearch'
 
 function App() {
+  const [sort, setSort] = useState(false)
   const { query, error, setQuery, handleErrors, resetError } = useSearch()
-  const { movies, searchMovies } = useMovieResults({ query })
+  const { movies, searchMovies } = useMovieResults({ query, sort })
 
   const handleSubmit = (event) => {
     event.preventDefault()
     handleErrors()
     if (!error) searchMovies()
+  }
+
+  const handleSort = () => {
+    setSort(!sort)
   }
 
   const handleChange = (event) => {
@@ -31,6 +37,7 @@ function App() {
               type="text"
               placeholder="Indiana Jones and the Lost Arch"
             />
+            <input type="checkbox" onChange={handleSort} checked={sort} />
             <button>Buscar</button>
           </div>
         </form>

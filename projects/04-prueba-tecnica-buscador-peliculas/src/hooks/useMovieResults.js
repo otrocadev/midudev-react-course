@@ -1,7 +1,7 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useMemo } from 'react'
 import { getMovies } from '../services/movies'
 
-export default function useMovieResults({ query }) {
+export default function useMovieResults({ query, sort }) {
   const [movies, setMovies] = useState([])
   const previousSearch = useRef(query)
 
@@ -12,5 +12,12 @@ export default function useMovieResults({ query }) {
     setMovies(newMovies)
   }
 
-  return { movies, searchMovies }
+  const sortedMovies = useMemo(() => {
+    console.log('sorted')
+    return sort
+      ? [...movies].sort((a, b) => a.title.localeCompare(b.title))
+      : movies
+  }, [sort, movies])
+
+  return { movies: sortedMovies, searchMovies }
 }
