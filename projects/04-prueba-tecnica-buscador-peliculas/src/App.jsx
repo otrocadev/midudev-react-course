@@ -12,7 +12,7 @@ function App() {
   const handleSubmit = (event) => {
     event.preventDefault()
     handleErrors()
-    if (!error) searchMovies()
+    if (!error) searchMovies({ query })
   }
 
   const handleSort = () => {
