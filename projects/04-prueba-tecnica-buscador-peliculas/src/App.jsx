@@ -20,8 +20,10 @@ function App() {
   }
 
   const handleChange = (event) => {
+    const newQuery = event.target.value
+    setQuery(newQuery)
+    searchMovies({ query: newQuery })
     resetError()
-    setQuery(event.target.value)
   }
 
   return (
